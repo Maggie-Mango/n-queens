@@ -121,11 +121,44 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+
+      // get the board, keep count
+      var board = this.rows();
+      var boardWidth = this.get('n');
+      var counter = 0;
+      // iterate through the board
+      for (let i = 0; i < board.length; i++) {
+        // if board at each row and column index is 1
+        var eachCol = board[i][colIndex];
+        if (eachCol === 1) {
+          // then increment the count
+          counter += 1;
+        }
+      }
+
+      //if the count is more than 1
+      if (counter > 1) {
+        // then return true;
+        return true;
+      }
+
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      //inputs: none
+      var boardWidth = this.get('n');
+      //iterate over each column, use i as column index
+      for (var i = 0; i < boardWidth; i++) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      //use helper function to pass i
+      //return true if helper function is also true
+
+
       return false; // fixme
     },
 
