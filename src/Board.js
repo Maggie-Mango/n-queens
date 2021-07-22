@@ -62,9 +62,7 @@
     },
 
 
-/*
-         _             _     _
-     ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
+    /*   ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
     \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
     |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
@@ -194,7 +192,7 @@
       //positive indexes
       //if input is 1, we want to iterate over the rows, i length can be set to the length of the board - col (aka index)
       if (!colIsNegative) {
-        for (var i = 0; i <= length - col; i++) {
+        for (var i = 0; i < length - col; i++) {
           if (this.rows()[i][col] === 1) {
             counter++;
 
