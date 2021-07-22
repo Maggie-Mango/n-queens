@@ -182,7 +182,6 @@
         col = -col;
         for (var i = col; i < length; i++) {
           if (this.rows()[i][startAt] === 1) {
-
             counter++;
           }
           startAt++;
@@ -232,11 +231,59 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+      //output: boolean
+      //input: 0 ~ boardWidth*2
+      //edge: if input is 0 then always return 0
+      var pointer = minorDiagonalColumnIndexAtFirstRow;
+      var counter = 0;
+      var boardWidth = this.get('n');
+      var pointerIsBigger = false;
+      if (pointer === 0 || pointer === boardWidth * 2 - 2) {
+        return false;
+      }
+      //loop through the board
+      if (pointer > boardWidth) {
+        pointerIsBigger = true;
+      }
+
+
+      // upper
+      if (!pointerIsBigger) {
+        for (i = 0; i < boardWidth; i++) {
+          if (this.rows()[i][pointer] === 1) {
+            counter ++;
+          }
+          pointer --;
+        }
+      }
+
+    // lower
+      if (pointerIsBigger) {
+        var row = pointer - boardWidth + 1;
+        for (i = boardWidth - 1; i >= 0; i--) {
+          if (this.rows()[i][pointer - i] === 1) {
+            counter ++;
+          }
+        }
+      }
+
+      if (counter > 1) {
+        return true;
+      }
+
       return false; // fixme
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var boardWidth = this.get('n');
+      var endAt = boardWidth * 2 - 1;
+      //iterate over boardwidth
+      for (var i = 0; i < endAt; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
       return false; // fixme
     }
 
