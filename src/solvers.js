@@ -12,19 +12,63 @@
 
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
-
-
+/*
+O: A matrix chessboard, with n rooks placed (1)
+I: n - size of the board, number rooks
+C: no negative numbers, no conflicts
+E:
+Justification:
+Explanation: We're returning a chess board with rooks
+Visualization:
+Approximation:
+Verification:
+Implementation:
+*/
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
+  var solution = board;
+  var board = new Board({n: n});
+
+  for (i = 0; i < n; i++) {
+    board.togglePiece(i, i);
+  }
+  solution = board.rows();
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
 };
+/*
+O: Returning a count of how many different ways you can place the rook so it doesn't attack each other
+I: A number 1-8
+C:
+E:
 
+*/
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
+
+// if n = 0, return 1
+//recurse n * recursiveFunc(n - 1)
+//Count = recursiveFunc(n)
+
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0; //fixme
+  //keep a obj where is row and value is column
+  {0: [0, 1, 2, 3],
+   1: [0, 1, 2, 3],
+   2: [0, 1, 2, 3],
+   3: [0, 1, 2, 3]}
+
+  //keep a counter
+
+
+  //to delete: delete Object.key;
+
+  //iterate number of rows
+  //place the piece at each (i) iteration
+    //remove line of the incides from that array
+    //iterate over the new array
+    //place the next piece
+
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
