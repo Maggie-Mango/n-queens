@@ -61,6 +61,19 @@
       );
     },
 
+    // clearBoard: function() {
+    //   var boardWidth = this.get('n');
+    //   if (this !== undefined) {
+    //     for (var i = 0; i < boardWidth; i++) {
+    //       for (var j = 0; j < boardWidth; j ++) {
+    //         this[i][j] = 0;
+    //       }
+    //       // this[i].fill(0);
+    //     }
+    //   }
+
+    // },
+
 
     /*   ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -95,6 +108,27 @@
       //if it is more than 1, return true
       return false; // fixme
     },
+
+    hasRowAttacked: function(rowIndex) {
+      //get array
+      //console.log('rowIndex ' + rowIndex);
+      //console.log('row' + row);
+      //var row = this.rows()[rowIndex];
+      var row = this.get(rowIndex);
+      var counter = 0;
+      for (var i = 0; i < row.length; i++) {
+        if (row[i] === 1) {
+          counter++;
+        }
+      }
+      if (counter >= 1) {
+        return true;
+      }
+      //check how many values are `1`
+      //if it is more than 1, return true
+      return false; // fixme
+    },
+
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {

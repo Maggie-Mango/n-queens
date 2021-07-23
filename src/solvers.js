@@ -53,23 +53,51 @@ E:
 window.countNRooksSolutions = function(n) {
   var solutionCount = 0; //fixme
   //keep a obj where is row and value is column
-  {0: [0, 1, 2, 3],
-   1: [0, 1, 2, 3],
-   2: [0, 1, 2, 3],
-   3: [0, 1, 2, 3]}
+
+  var board = new Board({n:n});
+  var clearBoard = function(n) {
+    console.log('filling board: ' + board.rows())
+    for (var i=0; i<n; i++) {
+      board.rows()[i].fill(0);
+    }
+  }
+
+  var reducer = function(memo, col) {
+    return memo + col;
+  };
+
 
   //keep a counter
+  var traverseBoard = function(col) {
+    if (col === n) {
+      //console.log('base case hit, increment solution');
+      var nRooks = board.rows().flat().reduce(reducer, 0);
+      if (nRooks === n) {
+        solutionCount++;
+      }
 
+      return;
+    }
+    for (var i = 0; i < n; i++) {
+      //check conflict
+      //console.log('i ' + i)
+      //console.log('n ' + n)
+      if (!board.hasRowAttacked(i)) {
+        //console.log('no conflicts, putting piece down')
+        board.togglePiece(i, col);
+        //console.log('board ' + board.rows());
+        //console.log('first row ' + board.rows()[0])
+        //console.log('second row ' + board.rows()[1])
+        traverseBoard(col + 1);
 
-  //to delete: delete Object.key;
+        //keep the current i & col position and clear the rest
+        clearBoard();
+        board.togglePiece(i, col);
+      }
+    }
+  };
 
-  //iterate number of rows
-  //place the piece at each (i) iteration
-    //remove line of the incides from that array
-    //iterate over the new array
-    //place the next piece
-
-
+  traverseBoard(0);
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
