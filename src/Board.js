@@ -297,7 +297,7 @@
         }
       }
 
-    // lower
+      // lower
       if (pointerIsBigger) {
         var row = pointer - boardWidth + 1;
         for (i = boardWidth - 1; i >= 0; i--) {

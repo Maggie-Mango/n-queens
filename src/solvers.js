@@ -1,5 +1,5 @@
 /*           _
-   ___  ___ | |_   _____ _ __ ___
+  ___  ___ | |_   _____ _ __ ___
   / __|/ _ \| \ \ / / _ \ '__/ __|
   \__ \ (_) | |\ V /  __/ |  \__ \
   |___/\___/|_| \_/ \___|_|  |___/
@@ -73,7 +73,7 @@ window.countNRooksSolutions = function(n) {
       //console.log('base case hit, increment solution');
       //var nRooks = board.rows().flat().reduce(reducer, 0);
       //if (nRooks === n) {
-        solutionCount++;
+      solutionCount++;
 
       return;
     }
@@ -109,7 +109,7 @@ var checkBoard = function (row, n, board, callBack) {
   for (var i = 0; i < n; i++) {
     board.togglePiece(row, i);
     if (!board['hasAnyQueensConflicts']()) {
-      var storage = checkBoard(row + 1, n, board, callBack)
+      var storage = checkBoard(row + 1, n, board, callBack);
       if (storage) {
         return;
       }
@@ -135,7 +135,8 @@ window.findNQueensSolution = function(n) {
       console.log('board ' + board.rows());
 
       //solution.concat(board.rows());
-      solution = board.rows().map(element => element.slice());
+      //puts row into array
+      solution = board.rows().map(row => row.slice());
       return;
       // solution = board.rows();
       // return;
@@ -157,23 +158,6 @@ window.findNQueensSolution = function(n) {
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
 };
-/*
-example n= ({4: 4})
-1,0,0,0,
-0,0,1,0,
-0,0,0,1,
-0,1,0,0
-
-0,0,1,0,
-1,0,0,0,
-0,0,0,1,
-0,1,0,0
-
-0,1,0,0,
-0,0,0,1,
-1,0,0,0,
-0,0,1,0
-*/
 
 
 
@@ -181,7 +165,7 @@ example n= ({4: 4})
 window.countNQueensSolutions = function(n) {
   let solutionCount = 0;
 
-  let board = new Board({n:n});
+  let board = new Board({n: n});
   if (n === 2 || n === 3) {
     return solutionCount;
   }
