@@ -109,12 +109,12 @@
       return false; // fixme
     },
 
-    hasRowAttacked: function(rowIndex) {
+    hasRowAttacked: function(rowIndex, colIndex) {
       //get array
       //console.log('rowIndex ' + rowIndex);
       //console.log('row' + row);
       //var row = this.rows()[rowIndex];
-      var row = this.get(rowIndex);
+      var row = this.get(rowIndex).slice(0, colIndex);
       var counter = 0;
       for (var i = 0; i < row.length; i++) {
         if (row[i] === 1) {
@@ -133,9 +133,9 @@
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
       //get the board and all the rows
-      var board = this.rows();
+      // var board = this.rows();
       //loop through the board
-      for (var i = 0; i < board.length; i++) {
+      for (var i = 0; i < this.get('n'); i++) {
         if (this.hasRowConflictAt(i)) {
           return true;
         } // does it exit the loop if returns true
@@ -202,12 +202,10 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var col = majorDiagonalColumnIndexAtFirstRow;
-      var length = this.get('n');
+      var length = this.get('n'); //no of cols
       var counter = 0;
       var colIsNegative = false;
-
       //for negative values -
-
       if (col <= 0) {
         colIsNegative = true;
         var startAt = 0;
@@ -225,7 +223,8 @@
       //positive indexes
       //if input is 1, we want to iterate over the rows, i length can be set to the length of the board - col (aka index)
       if (!colIsNegative) {
-        for (var i = 0; i < length - col; i++) {
+        var endAt = length - col;
+        for (var i = 0; i < endAt; i++) {
           if (this.rows()[i][col] === 1) {
             counter++;
 
@@ -243,10 +242,19 @@
       return false; // fixme
     },
 
+    /*
+    myboard = []
+    [1,0,0,0],
+    [0,0,1,0],
+    [0,0,0,1],
+    [0,1,0,0]
+  ]
+    */
+
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var boardWidth = this.get('n');
-      var startAt = -boardWidth + 1;
+      var startAt = - (boardWidth - 1);
       //iterate over boardwidth
       for (var i = startAt; i < boardWidth; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
